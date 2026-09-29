@@ -21,35 +21,51 @@ Batch: 1
 Image: 1
 Row: 2
 Column: 24
-*/
+
+//Template code for the assignment//
+ 
 #include <iostream>
-// #include <cstdint> // Not needed for this program, we need 4 bytes for the int type, int is same as int32_t.
 using namespace std;
 
 int main() {
     int position;
+
+    int variable0, variable1, variable2, variable3, variable4;
     cout << "Enter the memory position: ";
-    cin >> position;
+    cin >> variable0;
 
-    //const the number of pixels per image and per batch
-    const int PIXELS_PER_IMAGE = 32 * 24; //768
-    const int IMAGES_PER_BATCH = 8;
-    const int PIXELS_PER_BATCH = IMAGES_PER_BATCH * PIXELS_PER_IMAGE;
+    // enter your code here
 
-    //find the batch index
-    int batch = position / PIXELS_PER_BATCH;
-    //offset remaining memory index after batch
-    int OFFSET_AFTER_BATCH = position % PIXELS_PER_BATCH;
-    //find the image index
-    int image = OFFSET_AFTER_BATCH / PIXELS_PER_IMAGE;
-    //offset remaining memory index after image
-    int OFFSET_AFTER_IMAGE = OFFSET_AFTER_BATCH % PIXELS_PER_IMAGE;
-    //find the row
-    int row = OFFSET_AFTER_IMAGE / 32;
-    //find the column
-    int column = OFFSET_AFTER_IMAGE % 32;
+    cout << "The position corresponds to\n";
+    cout << "Batch: " << variable1 << endl;
+    cout << "Image: " << variable2 << endl;
+    cout << "Row: " << variable3 << endl;
+    cout << "Column: " << variable4 << endl;
 
-    cout << "\nThe position corresponds to" << endl;
+    return 0;
+}
+
+*/
+#include <iostream>
+using namespace std;
+
+int main() {
+    int position;// I dont understand why this variable is here, but I will leave it in case it is needed for something else.
+    //6767676767676767-SIXXXXXXXXXXXX-SEVENNNNNNNNNNN-67676767676767//
+    int mem, batch, image, row, column;
+    cout << "Enter the memory position: ";
+    cin >> mem;
+    //Image resolution is 32x24, so each image has 768 (32 * 24) pixels. Each batch has 8 images, so each batch has 6144 (32 * 24 * 8) pixels.
+    batch = (mem / (32 * 24 * 8));
+    //Above line calculates the batch number by dividing the memory position by the total number of pixels in a batch (6144).
+    image = (mem % (32 * 24 * 8)) / (32 * 24);
+    //Above line calculates the image number by dividing the remainder of above calculation.
+    row = (mem % (32 * 24)) / 32;
+    //Above line calculates the row number by dividing the remainder by the number of columns (32).
+    column = (mem % (32 * 24)) % 32;
+    //Above line calculates the column number by taking the remainder of the remainder divided by the number of columns (32).
+
+    cout << "The position corresponds to\n" << endl;
     cout << "Batch: " << batch << endl;
     cout << "Image: " << image << endl;
     cout << "Row: " << row << endl;
