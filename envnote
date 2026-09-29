@@ -1,6 +1,0 @@
-cd EE1301B
-git init
-git add .
-git commit -m "first commit"
-git rm --cached envnote
-git ls-files
